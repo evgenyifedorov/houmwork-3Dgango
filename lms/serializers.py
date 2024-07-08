@@ -9,26 +9,26 @@ from lms.validators import LinkValidator
 class LessonSerializer(ModelSerializer):
     class Meta:
         model = Lesson
-        fields = '__all__'
-        validators = [LinkValidator(filed='url')]
+        fields = "__all__"
+        validators = [LinkValidator(filed="url")]
 
 
 class CourseSerializer(ModelSerializer):
-    lesson = LessonSerializer(many=True, read_only=True, source='lesson_set')
+    lesson = LessonSerializer(many=True, read_only=True, source="lesson_set")
     lesson_count = SerializerMethodField()
     subscription = serializers.SerializerMethodField()
 
     class Meta:
         model = Course
-        fields = '__all__'
+        fields = "__all__"
 
-    def get_lesson_count(self,object):
+    def get_lesson_count(self, object):
         if object.lesson_set.count():
             return object.lesson_set.count()
         return 0
 
     def get_subscription(self, instance):
-        request = self.context.get('request')
+        request = self.context.get("request")
         user = None
         if request:
             user = request.user
@@ -38,6 +38,4 @@ class CourseSerializer(ModelSerializer):
 class SubscriptionSerializer(ModelSerializer):
     class Meta:
         model = Subscription
-        fields = '__all__'
-
-
+        fields = "__all__"
