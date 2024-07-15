@@ -14,6 +14,7 @@ from lms.models import Course, Lesson, Subscription
 from lms.paginators import LMSPagination
 from lms.serializers import CourseSerializer, LessonSerializer, SubscriptionSerializer
 from user.permissions import IsModerator, IsOwner
+from lms.tasks import send_email
 
 
 class CourseViewSet(viewsets.ModelViewSet):
@@ -46,6 +47,8 @@ class CourseViewSet(viewsets.ModelViewSet):
         return super().get_permissions()
 
 
+
+
 class LessonCreateAPIView(CreateAPIView):
     """
     Lesson create endpoint
@@ -57,6 +60,7 @@ class LessonCreateAPIView(CreateAPIView):
     def perform_create(self, serializer):
         lesson = serializer.save()
         lesson.owner = self.request.user
+        send_email.delay(lesson.course.pk)
         lesson.save()
 
 
