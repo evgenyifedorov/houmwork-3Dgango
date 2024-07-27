@@ -29,7 +29,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -89,6 +89,8 @@ DATABASES = {
         "NAME": os.getenv("POSTGRES_DB"),
         "USER": os.getenv("POSTGRES_USER"),
         "PASSWORD": os.getenv("POSTGRES_PASSWORD"),
+        "HOST": os.getenv("POSTGRES_HOST"),
+        "PORT": os.getenv("POSTGRES_PORT"),
     }
 }
 
@@ -151,8 +153,8 @@ SIMPLE_JWT = {
 
 STRIPE_API_KEY = os.getenv("STRIPE_API_KEY")
 
-CELERY_BROKER_URL = 'redis://127.0.0.1:6379/0'
-CELERY_BACKEND_URL = 'redis://127.0.0.1:6379/0'
+CELERY_BROKER_URL = os.getenv('CELERY_BROKER_URL')
+CELERY_BACKEND_URL = os.getenv('CELERY_BACKEND_URL')
 CELERY_BEAT_SCHEDULE = {
     'send reminder': {
         'task': 'user.tasks.check_last_login',
