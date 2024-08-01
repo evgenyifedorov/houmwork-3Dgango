@@ -65,12 +65,5 @@ urllib3==2.2.2
 vine==5.1.0
 wcwidth==0.2.13
 winrt-runtime==2.1.0
-winrt-Windows.Devices.Bluetooth==2.1.0
-winrt-Windows.Devices.Bluetooth.Advertisement==2.1.0
-winrt-Windows.Devices.Bluetooth.GenericAttributeProfile==2.1.0
-winrt-Windows.Devices.Enumeration==2.1.0
-winrt-Windows.Foundation==2.1.0
-winrt-Windows.Foundation.Collections==2.1.0
-winrt-Windows.Storage.Streams==2.1.0
 zope.event==5.0
 zope.interface==6.4.post2
